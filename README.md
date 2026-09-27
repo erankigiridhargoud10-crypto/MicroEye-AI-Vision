@@ -1,5 +1,7 @@
 # MicroEye — Sub-Millimeter AI Vision Inspection
 
+![MicroEye Banner](./assets/hero-banner.jpg)
+
 **A plug-in camera + AI module that catches 0.1–0.3mm solder cracks at full line speed — defects no human inspector can reliably catch.**
 
 Built for the **GITAM Innovation Challenge 2026** by team **Mind Matrix**.
@@ -13,6 +15,8 @@ Manual and semi-automated inspection on PCB assembly lines (running 3,000–6,00
 ## 💡 The Solution
 
 MicroEye is a **retrofit vision layer** that scans every board in real time, without replacing existing lines:
+
+![Pipeline Diagram](./assets/pipeline-diagram.jpg)
 
 1. **Camera** — mounted above the line
 2. **YOLO** — custom-trained vision model detects cracks, cold joints, misalignment, bridging
@@ -53,6 +57,23 @@ MicroEye is a **retrofit vision layer** that scans every board in real time, wit
 - **v2:** Multi-class taxonomy, higher-resolution imaging
 - **v3:** On-device continual learning
 - **Future:** ResonX — acoustic-resonance sensing for hidden/internal defects beyond vision
+
+## 🎥 Demo — Live Detection
+
+Real-time inference running on sample PCB images, flagging a `missing_hole` defect with confidence score:
+
+![Live Detection Demo 1](./assets/demo-live-detection-1.jpg)
+![Live Detection Demo 2](./assets/demo-live-detection-2.jpg)
+
+**Measured inference speed:** ~0.5–0.8ms preprocess, ~8.3–11.4ms inference, ~0.2ms postprocess per image at input shape `(1, 3, 256, 416)`.
+
+## 📦 Dataset
+
+Trained on **PCB Fault Detection – v2 PCB Defect with Aug**, exported via [Roboflow](https://roboflow.com):
+
+- **28,069 images**, annotated in YOLOv8 format
+- Preprocessing: auto-orientation (EXIF stripped), resized to 640×640
+- Augmentation: random Gaussian blur (0–1.1px), salt-and-pepper noise (~1.01% of pixels) — 2 versions generated per source image
 
 ## ✅ Current Status
 
